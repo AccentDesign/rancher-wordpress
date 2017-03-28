@@ -16,6 +16,11 @@ RUN         sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apach
 RUN         a2enmod rewrite
 
 
+# add a default error log
+RUN             touch /var/log/php_errors.log
+RUN             chmod 777 /var/log/php_errors.log
+COPY            php.ini /usr/local/etc/php/
+
 # Add image configuration and scripts
 ADD             run.sh /run.sh
 RUN             chmod 755 /*.sh
